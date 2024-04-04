@@ -1,0 +1,79 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --button-depth: 0.55em;
+  --button-position: -1em;
+  --button-press-speed: 175ms;
+}
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background-color: #f3f4f6;
+}
+
+@layer components {
+  .btn-base {
+  @apply gap-x-1.5 rounded-md px-3 py-2 text-sm font-semibold shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
+}
+
+.btn {
+  position: relative;
+  transform-style: preserve-3d;
+  transition: all 175ms cubic-bezier(0, 0, 1, 1);
+  padding: 1em 2em;
+}
+
+.btn::before {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: translate3d(0, var(--button-depth), -1em);
+  transition: all var(--button-press-speed) cubic-bezier(0, 0, 1, 1);
+  border-radius: inherit;
+}
+
+.btn:active {
+  transform: translate(0em, var(--button-depth));
+}
+
+.btn:active::before {
+  transform: translate(0, 0);
+}
+
+.btn-inline {
+  @apply inline-flex items-center
+}
+
+.btn-full {
+  @apply flex w-full justify-center
+}
+
+.btn-copy-theme-color {
+  @apply text-white bg-indigo-600 hover:bg-indigo-500 focus-visible:outline-indigo-600;
+
+  &::before {
+    @apply bg-indigo-800;
+  }
+}
+
+.btn-reset-theme-color {
+  @apply text-white bg-teal-600 hover:bg-teal-500 focus-visible:outline-teal-600;
+
+  &::before {
+    @apply bg-teal-800;
+  }
+}
+
+.btn-generate-theme-color {
+  @apply text-white bg-orange-600 hover:bg-orange-500 focus-visible:outline-orange-600;
+
+  &::before {
+    @apply bg-orange-800;
+  }
+}
+}
